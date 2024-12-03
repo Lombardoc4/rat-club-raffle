@@ -38,6 +38,7 @@ const client = generateClient();
 
 function RaffleForm() {
     const [submitted, setSubmitted] = useState(false);
+    const [resubmitted, setResubmitted] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
@@ -62,8 +63,26 @@ function RaffleForm() {
           }
         })
 
+        // const emailPrefix = email.split('@')[0];
+        // const existingStore = localStorage.getItem(conf.raffle_id)
+        // if (existingStore.includes(emailPrefix)) {
+        //   setResubmitted(true)
+        //   return;
+        // }
+
         if (!emailExist.data.listRaffleEntries.items || emailExist.data.listRaffleEntries.items.length === 0) {
           await addEntry();
+
+          // Add localStorage value to prevent user from using multiple emails
+          // let storeVal = emailPrefix;
+          // if (existingStore) {
+          //   storeVal += `,${existingStore}`
+          // }
+          // localStorage.setItem(conf.raffle_id, storeVal);
+
+        } else {
+          setResubmitted(true)
+          return;
         }
 
         setSubmitted(true);
@@ -87,10 +106,20 @@ function RaffleForm() {
       }
     }
 
+    if (resubmitted) {
+      return (
+
+        <>
+          <h1>Good try, only one submission</h1>
+          <img src="https://media.giphy.com/media/3oKIPznTgmcQGOlqyA/giphy.gif?cid=790b76115qr3btt0qcjixyg7tgxcnt6lo6q51xjj02z636x1&ep=v1_gifs_search&rid=giphy.gif&ct=g"/>
+        </>
+      )
+    }
 
     return (
         <form id="raffle-form" onSubmit={handleSubmit}>
           <img src={Logo} alt="The Rat Club" style={{maxHeight: '300px', width: 'unset'}} />
+
           { submitted && (
             <>
               <h1>Thanks for you submission</h1>
