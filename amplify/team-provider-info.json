@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ratclubraffle-staging-32888-authRole",
+      "UnauthRoleArn": "arn:aws:iam::890078463828:role/amplify-ratclubraffle-staging-32888-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::890078463828:role/amplify-ratclubraffle-staging-32888-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-ratclubraffle-staging-32888-deployment",
+      "UnauthRoleName": "amplify-ratclubraffle-staging-32888-unauthRole",
+      "StackName": "amplify-ratclubraffle-staging-32888",
+      "StackId": "arn:aws:cloudformation:us-east-1:890078463828:stack/amplify-ratclubraffle-staging-32888/82fb3290-b108-11ef-84a9-0afffc72fe3f",
+      "AmplifyAppId": "d29onc5u6r8hpf"
+    }
+  }
+}
