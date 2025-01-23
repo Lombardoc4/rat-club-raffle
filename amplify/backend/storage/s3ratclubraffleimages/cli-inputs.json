@@ -1,0 +1,14 @@
+{
+  "resourceName": "s3ratclubraffleimages",
+  "bucketName": "ratclub-raffle-images",
+  "policyUUID": "14a6ca5e",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}

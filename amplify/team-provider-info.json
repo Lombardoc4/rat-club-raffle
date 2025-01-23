@@ -10,6 +10,17 @@
       "StackName": "amplify-ratclubraffle-staging-32888",
       "StackId": "arn:aws:cloudformation:us-east-1:890078463828:stack/amplify-ratclubraffle-staging-32888/82fb3290-b108-11ef-84a9-0afffc72fe3f",
       "AmplifyAppId": "d29onc5u6r8hpf"
+    },
+    "categories": {
+      "auth": {
+        "ratclubraffle": {}
+      },
+      "storage": {
+        "s3ratclubraffleimages": {}
+      },
+      "api": {
+        "ratclubraffle": {}
+      }
     }
   }
 }

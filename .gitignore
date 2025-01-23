@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Router
+.react-router/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
