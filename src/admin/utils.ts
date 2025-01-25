@@ -1,4 +1,16 @@
-import { getCurrentUser, SignInInput, signIn, AuthError, confirmSignIn, signOut } from "aws-amplify/auth";
+import {
+    getCurrentUser,
+    SignInInput,
+    signIn,
+    AuthError,
+    confirmSignIn,
+    signOut,
+    fetchAuthSession,
+    resetPassword,
+    ResetPasswordOutput,
+    confirmResetPassword,
+    ConfirmResetPasswordInput,
+} from "aws-amplify/auth";
 
 export const currentAuthenticatedUser = async () => {
     try {
@@ -20,7 +32,6 @@ export const handleSignIn = async ({ username, password }: SignInInput) => {
 };
 
 export const handleConfirmSignIn = async (newPass: string, userAttributes: { username: string; password: string }) => {
-    console.log("user", userAttributes);
     try {
         await signIn({ ...userAttributes });
 
@@ -40,7 +51,29 @@ export const handleConfirmSignIn = async (newPass: string, userAttributes: { use
 export const handleSignOut = async () => {
     try {
         await signOut();
+        window.location.reload();
     } catch (error) {
         console.log("error signing out: ", error);
+    }
+};
+
+export const handleResetPassword = async (username: string) => {
+    try {
+        const output = await resetPassword({ username });
+        return { nextStep: output.nextStep }
+    } catch (error) {
+        return { error: (error as AuthError).message };
+    }
+};
+
+
+export const handleConfirmResetPassword = async ({ username, confirmationCode, newPassword }: ConfirmResetPasswordInput) => {
+    try {
+        const res = await confirmResetPassword({ username, confirmationCode, newPassword });
+        console.log('res', res)
+    } catch (error) {
+        console.log(error);
+        return { error: (error as AuthError).message };
+
     }
 };

@@ -25,6 +25,9 @@ body {
   background-color: black;
   color:#ffffff;
 
+}
+
+#root {
   display: flex;
   justify-content: center;
   align-items: center;

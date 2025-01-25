@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { RaffleEntry, Winner } from "../API";
 import { Button } from "../components/Button";
 import { createWinner } from "../graphql/mutations";
-import { generateClient } from "aws-amplify/api";
 import { listWinners } from "../graphql/queries";
-
-const client = generateClient();
+import client from "../graphql/client";
 
 export const WinnerContainer = ({
     entries = [],
@@ -53,12 +51,12 @@ export const WinnerContainer = ({
     if (winners.length <= 0) return
 
     return (
-        <div className='my-4 md:order-2'>
+        <div>
             <div className='flex justify-between'>
                 <h2 className='text-2xl'>Winner{winners.length > 1 ? "s: " + winners.length : ""}</h2>
                 {entries.length > 0 && <label className='flex items-center space-x-2'>
                     <input type='checkbox' checked={showEmails} onChange={() => setShowEmails(!showEmails)} />
-                    <div className='text-sm font-semibold text-slate-200'>Emails</div>
+                    <div className='text-sm font-semibold text-slate-200'>Show Emails</div>
                 </label>}
             </div>
             {entries.length > 0 && <Button title='Generate Winner' onClick={generateWinner} />}

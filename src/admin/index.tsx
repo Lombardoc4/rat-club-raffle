@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import SignInForm from "./SignInForm";
 import NewPasswordForm from "./NewPasswordForm";
 import { currentAuthenticatedUser, handleConfirmSignIn, handleSignIn } from "./utils";
-import { signOut } from "aws-amplify/auth";
-import { Button } from "../components/Button";
-import { Dashboard } from "./Dashboard";
+import { Outlet } from "react-router";
 
  const Admin = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -78,6 +76,6 @@ import { Dashboard } from "./Dashboard";
         return <SignInForm onSubmit={handleSignInSubmit} error={error} />;
     }
 
-    return <Dashboard/>
+    return <Outlet />;
 };
 export default Admin

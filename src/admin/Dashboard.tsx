@@ -1,124 +1,147 @@
-import { generateClient } from "aws-amplify/api";
-import { Button } from "../components/Button";
-import { handleSignOut } from "./utils";
+import moment from "moment-timezone";
 import { useState, useEffect } from "react";
-import { Raffle, Winner } from "../API";
-import { RaffleGroupContainer, RaffleContainer } from "../components/RaffleContainers";
-import { listRafflesDetailed } from "../graphql/custom-queries";
-import moment from "moment";
-import { deleteRaffle } from "../graphql/mutations";
 import { Link } from "react-router";
 
-const client = generateClient();
+import { Raffle, Winner } from "../API";
+import { RaffleCardContainer, RaffleCard } from "../components/RaffleContainers";
+import { Button } from "../components/Button";
+import client from "../graphql/client";
+import { listRafflesDetailed } from "../graphql/custom-queries";
+import { deleteRaffle } from "../graphql/mutations";
+import { handleSignOut } from "./utils";
+import { Logo } from "../components/Logo";
 
+const sortRaffles = (raffles: Raffle[]) => {
+    const sorted: { [key in "upcoming" | "winnerless" | "active" | "old"]: Raffle[] } = {
+        upcoming: [],
+        winnerless: [],
+        active: [],
+        old: [],
+    };
+
+    const now = moment();
+    raffles.map((r) => {
+        // Sort by old and active raffles
+        if (moment(r.start_date).isAfter(now)) {
+            sorted.upcoming.push(r);
+        } else if (moment(r.end_date).isBefore(now)) {
+            // Check if raffle has no winners
+            if ((r.Winners?.items as Winner[]).length <= 0) {
+                sorted.winnerless.push(r);
+                return;
+            }
+            sorted.old.push(r);
+        } else {
+            sorted.active.push(r);
+        }
+    });
+
+    return sorted;
+};
+
+{
+    /* Fake navigation */
+}
+const FakeNav = () => {
+    return (
+        <div className='fixed top-4 right-4 flex gap-4'>
+            <Link to='/admin/create'>
+                <Button title='Create' />
+            </Link>
+
+            <Button title='Logout' onClick={handleSignOut} />
+        </div>
+    );
+};
 
 export const Dashboard = () => {
-    const [raffles, setRaffles] = useState<Raffle[]>([]);
     const [upcomingRaffles, setUpcomingRaffles] = useState<Raffle[]>([]);
     const [winnerlessRaffles, setWinnerlessRaffles] = useState<Raffle[]>([]);
     const [activeRaffles, setActiveRaffles] = useState<Raffle[]>([]);
     const [oldRaffles, setOldRaffles] = useState<Raffle[]>([]);
 
+    const confirmRemoveRaffle = (raffle: Raffle) => {
+        const confirm = window.confirm(`Are you sure you want to remove ${raffle.name}?`);
+        if (confirm) {
+            removeRaffle(raffle);
+        }
+    };
+
     const removeRaffle = async (raffle: Raffle) => {
         try {
-
             const { data } = await client.graphql({
                 query: deleteRaffle,
                 variables: { input: { id: raffle.id } },
             });
 
             if (data) {
-                setRaffles((prev) => prev.filter((r) => r.pid !== raffle.pid));
+                // Only remove from upcoming raffles
                 setUpcomingRaffles((prev) => prev.filter((r) => r.pid !== raffle.pid));
-
-
             }
         } catch (err) {
             console.log("Error deleting raffle", err);
         }
-    }
+    };
 
-    const sortRaffles = () => {
-        const now = moment();
-        raffles.map((r) => {
-            // Sort by old and active raffles
-            if (moment(r.start_date).isAfter(now)) {
-                setUpcomingRaffles((prev) => [...prev, r]);
-            } else if (moment(r.end_date).isBefore(now)) {
-                // Check if raffle has no winners
-                if ((r.Winners?.items as Winner[]).length <= 0) {
-                    setWinnerlessRaffles((prev) => [...prev, r]);
-                    return;
-                }
-
-                setOldRaffles((prev) => [...prev, r]);
-            } else {
-                setActiveRaffles((prev) => [...prev, r]);
-            }
-        });
-    }
-
+    // Fetch raffles on load
     useEffect(() => {
         const fetchRafflesData = async () => {
             const { data } = await client.graphql({ query: listRafflesDetailed });
-            setRaffles(data.listRaffles.items as Raffle[]);
+            if (data.listRaffles.items.length > 0) {
+                const { upcoming, winnerless, active, old } = sortRaffles(data.listRaffles.items as Raffle[]);
+
+                // Update state
+                setUpcomingRaffles(upcoming);
+                setWinnerlessRaffles(winnerless);
+                setActiveRaffles(active);
+                setOldRaffles(old);
+            }
         };
 
         fetchRafflesData();
     }, []);
 
-    useEffect(() => {
-        raffles.length > 0 && sortRaffles();
-
-    }, [raffles]);
-
 
     return (
-        <main className='pt-4'>
-            <div className='fixed top-4 right-4 flex gap-4'>
-                <Link to='/admin/create'>
-                    <Button title='Create' />
-                </Link>
+        <>
+            <FakeNav />
 
-                <Button title='Logout' onClick={handleSignOut} />
-            </div>
-            <h1 className='text-4xl'>Admin Home</h1>
-
-            {/* // Add need Container for raffles that new to declare winner */}
+            {/* Title */}
+            <h1 className='text-4xl mt-8'>Admin Home</h1>
 
             {/* Upcming Raffles */}
             {upcomingRaffles.length > 0 && (
-                <RaffleGroupContainer title={"Upcoming"}>
+                <RaffleCardContainer title={"Upcoming"}>
                     {upcomingRaffles.map((r) => (
-                        <RaffleContainer key={r.name} raffle={r} removeRaffle={removeRaffle} />
+                        <RaffleCard key={r.name} raffle={r} removeRaffle={confirmRemoveRaffle} />
                     ))}
-                </RaffleGroupContainer>
+                </RaffleCardContainer>
             )}
 
             {/* Winnerless Raffles */}
             {winnerlessRaffles.length > 0 && (
-                <RaffleGroupContainer title={"Waiting for Winner"}>
+                <RaffleCardContainer title={"Waiting for Winner"}>
                     {winnerlessRaffles.map((r) => (
-                        <RaffleContainer key={r.name} raffle={r} detailed />
+                        <RaffleCard key={r.name} raffle={r} detailed />
                     ))}
-                </RaffleGroupContainer>
+                </RaffleCardContainer>
             )}
 
             {/* Active Raffles */}
             {activeRaffles.length > 0 && (
-                <RaffleGroupContainer title={"Current Raffle" + (activeRaffles.length > 1 ? "s" : "")}>
+                <RaffleCardContainer title={"Current Raffle" + (activeRaffles.length > 1 ? "s" : "")}>
                     {activeRaffles.map((r) => (
-                        <RaffleContainer key={r.name} raffle={r} active detailed />
+                        <RaffleCard key={r.name} raffle={r} active detailed />
                     ))}
-                </RaffleGroupContainer>
+                </RaffleCardContainer>
             )}
 
             {/* Old Raffles */}
-            <RaffleGroupContainer title='Past Raffles'>
+            <RaffleCardContainer title='Past Raffles'>
                 {oldRaffles.map((r) => (
-                    <RaffleContainer key={r.name} raffle={r} detailed />
+                    <RaffleCard key={r.name} raffle={r} detailed />
                 ))}
-            </RaffleGroupContainer>
-        </main>
+            </RaffleCardContainer>
+        </>
     );
-}
+};

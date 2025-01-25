@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router';
+import { handleResetPassword } from './utils';
 
 interface SignInFormProps {
   onSubmit: (username: string, password: string) => void;
@@ -27,7 +29,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit, error }) => {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="bg-black block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </label>
           </div>
@@ -38,7 +40,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit, error }) => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="bg-black block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </label>
           </div>
@@ -49,6 +51,12 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit, error }) => {
             Sign In
           </button>
         </form>
+
+        <div className='text-center'>
+          <Link className='underline text-indigo-600' to="/reset-password">
+            Reset Password
+          </Link>
+        </div>
       </div>
     </div>
   );

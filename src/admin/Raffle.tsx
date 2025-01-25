@@ -61,31 +61,21 @@ export const AdminRaffle = () => {
         return <p className='text-4xl'>No raffle found</p>;
     }
 
-    // If Raffle exists conditions:
-    // 1. Raffle isn't over
-    // 2: Raffle has winner
-    if (raffle && new Date(raffle.end_date) > new Date()) {
-        return (
-            <main className='grid text-center'>
-                <RaffleHeader raffle={raffle} />
-                <p className='text-green-600'>Active</p>
-                <Link className='mx-auto text-xl' to={"/raffle" + raffle.pid}>
-                    <Button title='Enter now' />
-                </Link>
-            </main>
-        );
-    }
-
     return (
-        <main>
+        <main className='pb-12 lg:pb-16 container mx-auto'>
             <Link to='/admin' className='fixed right-4 bottom-4 flex justify-center items-center'>
                 <Button title='🏠' />
             </Link>
 
             <RaffleHeader raffle={raffle} />
-            <div className='grid md:grid-cols-2 gap-x-6'>
-                <WinnerContainer raffleID={raffle.id} entries={entries} />
-                {entries.length > 0 && <RaffleEntriesContainer entries={entries} />}
+            <div className='max-w-96 mx-auto'>
+                {entries.length <= 0 && <p className="text-center">No Entries</p>}
+                {entries.length > 0 && (
+                    <div className='grid gap-6 max-w-96 mx-auto'>
+                        <WinnerContainer raffleID={raffle.id} entries={entries} />
+                        {entries.length > 0 && <RaffleEntriesContainer entries={entries} />}
+                    </div>
+                )}
             </div>
         </main>
     );

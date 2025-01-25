@@ -1,17 +1,16 @@
+import moment from "moment-timezone";
 import { useEffect, useState } from "react";
-import { generateClient } from "aws-amplify/api";
 import { useParams, Link } from "react-router";
+
+import { RaffleForm } from "./RaffleForm";
+import { WinnerContainer } from "./admin/WinnerContainer";
 import { Button } from "./components/Button";
 import { RaffleHeader } from "./components/RaffleHeader";
-import { Raffle as RaffleType } from "./API";
-import moment from "moment";
-import { getRaffleWithWinners } from "./graphql/custom-queries";
-import { RaffleForm } from "./RaffleForm";
-import { listRaffles } from "./graphql/queries";
-import { W } from "react-router/dist/development/fog-of-war-Ckdfl79L";
-import { WinnerContainer } from "./admin/WinnerContainer";
 
-const client = generateClient();
+import { Raffle as RaffleType } from "./API";
+import client from "./graphql/client";
+import { listRaffles } from "./graphql/queries";
+
 
 export const DefaultRaffle = () => {
     const [raffle, setRaffle] = useState<RaffleType | null>(null);
@@ -51,75 +50,65 @@ export const DefaultRaffle = () => {
 
     // If Raffle exists conditions:
     // 1. Raffle is over
-    if (raffle && moment(raffle.end_date).isBefore(moment())) {
-        return (
-            <main>
-                <Link to='/admin' className='fixed right-4 bottom-4 flex justify-center items-center'>
-                    <Button title='🏠' />
-                </Link>
-
-                <RaffleHeader raffle={raffle} />
-
-                {/* Bump to separate component */}
-                <div className='max-w-96 w-full mx-auto grid gap-4'>
-                    {/* Winners */}
-                    <WinnerContainer raffleID={raffle.id} />
-                    {
-                        <div className="order-2">
-                            {raffle.drawing_date ? (
-                                <div className='mt-4'>
-                                    <p className='font-bold'>
-                                        Drawing {moment(raffle.drawing_date).isBefore(moment()) ? "was" : "on"}
-                                    </p>
-                                    <p className='border border-blue-500 py-1 px-2 rounded text-xl'>
-                                        {moment(raffle.drawing_date).format("LLLL")}
-                                    </p>
-                                </div>
-                            ) : (
-                                <p className='text-xl'>
-                                    Raffle Closed <br /> Stay Tuned
-                                </p>
-                            )}
-                        </div>
-                    }
-                </div>
-            </main>
-        );
-    }
-
     return (
-        <main>
-            <Link to='/admin' className='fixed right-4 bottom-4 flex justify-center items-center'>
+        <>
+            <Link to='/' className='fixed right-4 bottom-4 flex justify-center items-center'>
                 <Button title='🏠' />
             </Link>
 
             <RaffleHeader raffle={raffle} />
 
-            <div className='max-w-96 mx-auto'>
-                {/* Entry form */}
+            {/* Raffle is over/closed */}
+            {moment(raffle.end_date).isBefore(moment()) && (
+                <div className='max-w-96 w-full mx-auto grid gap-4'>
+                    {/* Winners */}
+                    <WinnerContainer raffleID={raffle.id} />
 
-                {raffle && moment(raffle.start_date).isAfter(moment()) ? (
-                    <div>
-                        <p className='font-bold'>Raffle Starts:</p>
-                        <p className='border border-green-500 py-1 px-2 rounded'>
-                            <span className='text-xl'>{moment(raffle.start_date).format("LLLL")}</span>
-                        </p>
-                    </div>
-                ) : (
-                    <>
-                        <RaffleForm raffle={raffle} />
-
-                        {raffle.drawing_date && (
-                            <div className='mt-4'>
-                                <p className='font-bold'>Raffle Drawing:</p>
+                    {/* Dates */}
+                    <div className='order-2'>
+                        {raffle.drawing_date ? (
+                            <>
+                                <p className='font-bold'>
+                                    Drawing {moment(raffle.drawing_date).isBefore(moment()) ? "was" : "on"}
+                                </p>
                                 <p className='border border-blue-500 py-1 px-2 rounded text-xl'>
                                     {moment(raffle.drawing_date).format("LLLL")}
                                 </p>
-                            </div>
+                            </>
+                        ) : (
+                            <p className='text-xl text-center'>
+                                Raffle Closed <br /> Stay Tuned
+                            </p>
                         )}
-                    </>
-                )}
-            </div>
-        </main>
+                    </div>
+                </div>
+            )}
+
+            {/* Raffle has not started yet */}
+            {moment(raffle.start_date).isAfter(moment()) && (
+                <div>
+                    <p className='font-bold'>Raffle Starts:</p>
+                    <p className='border border-green-500 py-1 px-2 rounded'>
+                        {moment(raffle.start_date).format("LLLL")}
+                    </p>
+                </div>
+            )}
+
+            {/* Raffle has started and isn't over */}
+            {moment(raffle.start_date).isBefore(moment()) && moment(raffle.end_date).isAfter(moment()) && (
+                <>
+                    <RaffleForm raffle={raffle} />
+
+                    {raffle.drawing_date && (
+                        <div className='mt-4'>
+                            <p className='font-bold'>Raffle Drawing:</p>
+                            <p className='border border-blue-500 py-1 px-2 rounded text-xl'>
+                                {moment(raffle.drawing_date).format("LLLL")}
+                            </p>
+                        </div>
+                    )}
+                </>
+            )}
+        </>
     );
-};
+}
