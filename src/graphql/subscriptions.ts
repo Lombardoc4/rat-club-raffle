@@ -1,14 +1,15 @@
 /* tslint:disable */
-/* eslint-disable */
+
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../API";
+import * as APITypes from '../API';
 type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionInput: InputType;
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateRaffle = /* GraphQL */ `subscription OnCreateRaffle($filter: ModelSubscriptionRaffleFilterInput) {
+export const onCreateRaffle =
+  /* GraphQL */ `subscription OnCreateRaffle($filter: ModelSubscriptionRaffleFilterInput) {
   onCreateRaffle(filter: $filter) {
     id
     name
@@ -32,10 +33,11 @@ export const onCreateRaffle = /* GraphQL */ `subscription OnCreateRaffle($filter
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateRaffleSubscriptionVariables,
-  APITypes.OnCreateRaffleSubscription
->;
-export const onUpdateRaffle = /* GraphQL */ `subscription OnUpdateRaffle($filter: ModelSubscriptionRaffleFilterInput) {
+    APITypes.OnCreateRaffleSubscriptionVariables,
+    APITypes.OnCreateRaffleSubscription
+  >;
+export const onUpdateRaffle =
+  /* GraphQL */ `subscription OnUpdateRaffle($filter: ModelSubscriptionRaffleFilterInput) {
   onUpdateRaffle(filter: $filter) {
     id
     name
@@ -59,10 +61,11 @@ export const onUpdateRaffle = /* GraphQL */ `subscription OnUpdateRaffle($filter
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateRaffleSubscriptionVariables,
-  APITypes.OnUpdateRaffleSubscription
->;
-export const onDeleteRaffle = /* GraphQL */ `subscription OnDeleteRaffle($filter: ModelSubscriptionRaffleFilterInput) {
+    APITypes.OnUpdateRaffleSubscriptionVariables,
+    APITypes.OnUpdateRaffleSubscription
+  >;
+export const onDeleteRaffle =
+  /* GraphQL */ `subscription OnDeleteRaffle($filter: ModelSubscriptionRaffleFilterInput) {
   onDeleteRaffle(filter: $filter) {
     id
     name
@@ -86,10 +89,11 @@ export const onDeleteRaffle = /* GraphQL */ `subscription OnDeleteRaffle($filter
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteRaffleSubscriptionVariables,
-  APITypes.OnDeleteRaffleSubscription
->;
-export const onCreateRaffleEntry = /* GraphQL */ `subscription OnCreateRaffleEntry(
+    APITypes.OnDeleteRaffleSubscriptionVariables,
+    APITypes.OnDeleteRaffleSubscription
+  >;
+export const onCreateRaffleEntry =
+  /* GraphQL */ `subscription OnCreateRaffleEntry(
   $filter: ModelSubscriptionRaffleEntryFilterInput
 ) {
   onCreateRaffleEntry(filter: $filter) {
@@ -105,10 +109,11 @@ export const onCreateRaffleEntry = /* GraphQL */ `subscription OnCreateRaffleEnt
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateRaffleEntrySubscriptionVariables,
-  APITypes.OnCreateRaffleEntrySubscription
->;
-export const onUpdateRaffleEntry = /* GraphQL */ `subscription OnUpdateRaffleEntry(
+    APITypes.OnCreateRaffleEntrySubscriptionVariables,
+    APITypes.OnCreateRaffleEntrySubscription
+  >;
+export const onUpdateRaffleEntry =
+  /* GraphQL */ `subscription OnUpdateRaffleEntry(
   $filter: ModelSubscriptionRaffleEntryFilterInput
 ) {
   onUpdateRaffleEntry(filter: $filter) {
@@ -124,10 +129,11 @@ export const onUpdateRaffleEntry = /* GraphQL */ `subscription OnUpdateRaffleEnt
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateRaffleEntrySubscriptionVariables,
-  APITypes.OnUpdateRaffleEntrySubscription
->;
-export const onDeleteRaffleEntry = /* GraphQL */ `subscription OnDeleteRaffleEntry(
+    APITypes.OnUpdateRaffleEntrySubscriptionVariables,
+    APITypes.OnUpdateRaffleEntrySubscription
+  >;
+export const onDeleteRaffleEntry =
+  /* GraphQL */ `subscription OnDeleteRaffleEntry(
   $filter: ModelSubscriptionRaffleEntryFilterInput
 ) {
   onDeleteRaffleEntry(filter: $filter) {
@@ -143,10 +149,11 @@ export const onDeleteRaffleEntry = /* GraphQL */ `subscription OnDeleteRaffleEnt
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteRaffleEntrySubscriptionVariables,
-  APITypes.OnDeleteRaffleEntrySubscription
->;
-export const onCreateWinner = /* GraphQL */ `subscription OnCreateWinner($filter: ModelSubscriptionWinnerFilterInput) {
+    APITypes.OnDeleteRaffleEntrySubscriptionVariables,
+    APITypes.OnDeleteRaffleEntrySubscription
+  >;
+export const onCreateWinner =
+  /* GraphQL */ `subscription OnCreateWinner($filter: ModelSubscriptionWinnerFilterInput) {
   onCreateWinner(filter: $filter) {
     id
     name
@@ -159,10 +166,11 @@ export const onCreateWinner = /* GraphQL */ `subscription OnCreateWinner($filter
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateWinnerSubscriptionVariables,
-  APITypes.OnCreateWinnerSubscription
->;
-export const onUpdateWinner = /* GraphQL */ `subscription OnUpdateWinner($filter: ModelSubscriptionWinnerFilterInput) {
+    APITypes.OnCreateWinnerSubscriptionVariables,
+    APITypes.OnCreateWinnerSubscription
+  >;
+export const onUpdateWinner =
+  /* GraphQL */ `subscription OnUpdateWinner($filter: ModelSubscriptionWinnerFilterInput) {
   onUpdateWinner(filter: $filter) {
     id
     name
@@ -175,10 +183,11 @@ export const onUpdateWinner = /* GraphQL */ `subscription OnUpdateWinner($filter
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateWinnerSubscriptionVariables,
-  APITypes.OnUpdateWinnerSubscription
->;
-export const onDeleteWinner = /* GraphQL */ `subscription OnDeleteWinner($filter: ModelSubscriptionWinnerFilterInput) {
+    APITypes.OnUpdateWinnerSubscriptionVariables,
+    APITypes.OnUpdateWinnerSubscription
+  >;
+export const onDeleteWinner =
+  /* GraphQL */ `subscription OnDeleteWinner($filter: ModelSubscriptionWinnerFilterInput) {
   onDeleteWinner(filter: $filter) {
     id
     name
@@ -191,6 +200,6 @@ export const onDeleteWinner = /* GraphQL */ `subscription OnDeleteWinner($filter
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteWinnerSubscriptionVariables,
-  APITypes.OnDeleteWinnerSubscription
->;
+    APITypes.OnDeleteWinnerSubscriptionVariables,
+    APITypes.OnDeleteWinnerSubscription
+  >;

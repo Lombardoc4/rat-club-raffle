@@ -1,4 +1,4 @@
-type Raffle @model @auth(rules: [{allow: public}]) {
+type Raffle @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
   images: [AWSURL!]
@@ -11,7 +11,7 @@ type Raffle @model @auth(rules: [{allow: public}]) {
   Winners: [Winner] @hasMany(indexName: "byRaffle", fields: ["id"])
 }
 
-type RaffleEntry @model @auth(rules: [{allow: public}]) {
+type RaffleEntry @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
   email: AWSEmail!
@@ -20,7 +20,7 @@ type RaffleEntry @model @auth(rules: [{allow: public}]) {
   raffleID: ID! @index(name: "byRaffle")
 }
 
-type Winner @model @auth(rules: [{allow: public}]) {
+type Winner @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
   email: AWSEmail!

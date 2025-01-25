@@ -1,9 +1,9 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 export default {
-  content: ["./src/**/*.{html,jsx,tsx}"],
+  content: ['./src/**/*.{html,jsx,tsx}'],
   theme: {
     extend: {},
   },
   plugins: [],
-} satisfies Config
+} satisfies Config;

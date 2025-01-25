@@ -1,7 +1,7 @@
-import * as APITypes from "../API";
+import * as APITypes from '../API';
 type GeneratedQuery<InputType, OutputType> = string & {
-    __generatedQueryInput: InputType;
-    __generatedQueryOutput: OutputType;
+  __generatedQueryInput: InputType;
+  __generatedQueryOutput: OutputType;
 };
 
 export const listRafflesDetailed = /* GraphQL */ `
@@ -32,7 +32,10 @@ export const listRafflesDetailed = /* GraphQL */ `
               }
           }
       }
-  ` as GeneratedQuery<APITypes.ListRafflesDetailedQueryVariables, APITypes.ListRafflesDetailedQuery>;
+  ` as GeneratedQuery<
+  APITypes.ListRafflesDetailedQueryVariables,
+  APITypes.ListRafflesDetailedQuery
+>;
 
 export const getRaffleWithWinners = /* GraphQL */ `query GetRaffleWithWinners(
   $filter: ModelRaffleFilterInput

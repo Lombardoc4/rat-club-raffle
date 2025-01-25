@@ -1,8 +1,8 @@
 /* tslint:disable */
-/* eslint-disable */
+
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../API";
+import * as APITypes from '../API';
 type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryInput: InputType;
   __generatedQueryOutput: OutputType;
@@ -101,7 +101,8 @@ export const listRaffleEntries = /* GraphQL */ `query ListRaffleEntries(
   APITypes.ListRaffleEntriesQueryVariables,
   APITypes.ListRaffleEntriesQuery
 >;
-export const raffleEntriesByRaffleID = /* GraphQL */ `query RaffleEntriesByRaffleID(
+export const raffleEntriesByRaffleID =
+  /* GraphQL */ `query RaffleEntriesByRaffleID(
   $raffleID: ID!
   $sortDirection: ModelSortDirection
   $filter: ModelRaffleEntryFilterInput
@@ -131,9 +132,9 @@ export const raffleEntriesByRaffleID = /* GraphQL */ `query RaffleEntriesByRaffl
   }
 }
 ` as GeneratedQuery<
-  APITypes.RaffleEntriesByRaffleIDQueryVariables,
-  APITypes.RaffleEntriesByRaffleIDQuery
->;
+    APITypes.RaffleEntriesByRaffleIDQueryVariables,
+    APITypes.RaffleEntriesByRaffleIDQuery
+  >;
 export const getWinner = /* GraphQL */ `query GetWinner($id: ID!) {
   getWinner(id: $id) {
     id
