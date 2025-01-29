@@ -53,7 +53,7 @@ export const DefaultRaffle = () => {
     <>
       <Link
         to='/'
-        className='fixed bottom-4 right-4 flex items-center justify-center'
+        className='fixed bottom-4 start-4 flex items-center justify-center'
       >
         <Button title='🏠' />
       </Link>
@@ -102,7 +102,7 @@ export const DefaultRaffle = () => {
       {/* Raffle has started and isn't over */}
       {moment(raffle.start_date).isBefore(moment()) &&
         moment(raffle.end_date).isAfter(moment()) && (
-          <>
+          <div className='max-w-96 mx-auto'>
             <RaffleForm raffle={raffle} />
 
             {raffle.drawing_date && (
@@ -113,7 +113,7 @@ export const DefaultRaffle = () => {
                 </p>
               </div>
             )}
-          </>
+          </div>
         )}
     </>
   );
