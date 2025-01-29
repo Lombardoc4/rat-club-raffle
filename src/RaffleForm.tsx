@@ -74,7 +74,7 @@ export const RaffleForm = ({ raffle }: { raffle: Raffle }) => {
           type='text'
           id='name'
           name='name'
-          className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
+          className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-xs focus:border-indigo-500 focus:outline-hidden focus:ring-indigo-500 sm:text-sm'
           required
         />
       </div>
@@ -88,7 +88,7 @@ export const RaffleForm = ({ raffle }: { raffle: Raffle }) => {
           type='email'
           id='email'
           name='email'
-          className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
+          className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-xs focus:border-indigo-500 focus:outline-hidden focus:ring-indigo-500 sm:text-sm'
           required
         />
       </div>

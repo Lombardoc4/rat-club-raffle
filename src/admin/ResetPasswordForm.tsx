@@ -55,7 +55,7 @@ export const ResetPasswordForm = () => {
   if (enterCode) {
     return (
       <div className='flex min-h-screen items-center justify-center'>
-        <div className='w-full max-w-md space-y-6 rounded p-8 shadow-md'>
+        <div className='w-full max-w-md space-y-6 rounded-sm p-8 shadow-md'>
           <div className='text-center font-bold'>
             <h2 className='text-2xl'>Reset Password</h2>
             {!error && message && <p>{message}</p>}
@@ -69,7 +69,7 @@ export const ResetPasswordForm = () => {
                   type='text'
                   value={confirmationCode}
                   onChange={(e) => setConfirmatioCode(e.target.value)}
-                  className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                  className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                 />
               </label>
             </div>
@@ -80,14 +80,14 @@ export const ResetPasswordForm = () => {
                   type='password'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                  className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                 />
               </label>
             </div>
 
             <button
               type='submit'
-              className='w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+              className='w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-xs hover:bg-indigo-700 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
             >
               Submit
             </button>
@@ -99,7 +99,7 @@ export const ResetPasswordForm = () => {
 
   return (
     <div className='flex min-h-screen items-center justify-center'>
-      <div className='w-full max-w-md space-y-6 rounded p-8 shadow-md'>
+      <div className='w-full max-w-md space-y-6 rounded-sm p-8 shadow-md'>
         <div className='text-center font-bold'>
           <h2 className='text-2xl'>Reset Password</h2>
           {!error && message && <p>{message}</p>}
@@ -113,14 +113,14 @@ export const ResetPasswordForm = () => {
                 type='text'
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
               />
             </label>
           </div>
 
           <button
             type='submit'
-            className='w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+            className='w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-xs hover:bg-indigo-700 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
           >
             Send Code
           </button>

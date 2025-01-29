@@ -47,7 +47,7 @@ export const Stage1 = ({
   };
 
   return (
-    <form className='space-y-4 rounded border p-4' onSubmit={handleSubmit}>
+    <form className='space-y-4 rounded-sm border p-4' onSubmit={handleSubmit}>
       <div>
         <div className='flex justify-between'>
           <label className='block text-sm font-medium'>Name</label>
@@ -58,7 +58,7 @@ export const Stage1 = ({
           onChange={(e) => setName(e.target.value)}
           value={name}
           required
-          className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
+          className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-xs focus:border-indigo-500 focus:outline-hidden focus:ring-indigo-500 sm:text-sm'
         />
       </div>
       <div className='flex items-center'>
@@ -66,7 +66,7 @@ export const Stage1 = ({
           type='checkbox'
           checked={patreon}
           onChange={(e) => setPatreon(e.target.checked)}
-          className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+          className='h-4 w-4 rounded-sm border-gray-300 text-indigo-600 focus:ring-indigo-500'
         />
         <label className='ml-2 block text-sm'>Patreon Only</label>
       </div>

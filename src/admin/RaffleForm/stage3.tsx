@@ -20,7 +20,7 @@ const DateInput = ({
         </label>
         {checked && onChange && (
           <a
-            className='cursor-pointer rounded border px-2 py-0.5 text-xs'
+            className='cursor-pointer rounded-sm border px-2 py-0.5 text-xs'
             onClick={() =>
               onChange({
                 target: { value: '' },
@@ -36,7 +36,7 @@ const DateInput = ({
         type='datetime-local'
         onChange={onChange}
         value={value}
-        className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
+        className='mt-1 block w-full rounded-md border border-gray-300 bg-black px-3 py-2 shadow-xs focus:border-indigo-500 focus:outline-hidden focus:ring-indigo-500 sm:text-sm'
       />
     </div>
   );
@@ -134,7 +134,7 @@ export const Stage3 = ({
   };
 
   return (
-    <form className='space-y-4 rounded border p-4' onSubmit={handleSubmit}>
+    <form className='space-y-4 rounded-sm border p-4' onSubmit={handleSubmit}>
       {error && <div className='text-red-500'>{error}</div>}
       <DateInput
         title='Start Date'

@@ -76,7 +76,7 @@ export const DefaultRaffle = () => {
                     ? 'was'
                     : 'on'}
                 </p>
-                <p className='rounded border border-blue-500 px-2 py-1 text-xl'>
+                <p className='rounded-sm border border-blue-500 px-2 py-1 text-xl'>
                   {moment(raffle.drawing_date).format('LLLL')}
                 </p>
               </>
@@ -93,7 +93,7 @@ export const DefaultRaffle = () => {
       {moment(raffle.start_date).isAfter(moment()) && (
         <div>
           <p className='font-bold'>Raffle Starts:</p>
-          <p className='rounded border border-green-500 px-2 py-1'>
+          <p className='rounded-sm border border-green-500 px-2 py-1'>
             {moment(raffle.start_date).format('LLLL')}
           </p>
         </div>
@@ -108,7 +108,7 @@ export const DefaultRaffle = () => {
             {raffle.drawing_date && (
               <div className='mt-4'>
                 <p className='font-bold'>Raffle Drawing:</p>
-                <p className='rounded border border-blue-500 px-2 py-1 text-xl'>
+                <p className='rounded-sm border border-blue-500 px-2 py-1 text-xl'>
                   {moment(raffle.drawing_date).format('LLLL')}
                 </p>
               </div>

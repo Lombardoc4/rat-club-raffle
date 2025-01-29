@@ -75,7 +75,7 @@ export const WinnerContainer = ({
       {entries.length > 0 && (
         <Button title='Generate Winner' onClick={generateWinner} />
       )}
-      <ul className='rounded border p-4'>
+      <ul className='rounded-sm border p-4'>
         {winners.map((winner, index) => (
           <li className='text-xl' key={winner.id + index}>
             <p>{winner.name}</p>

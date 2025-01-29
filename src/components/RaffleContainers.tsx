@@ -45,7 +45,7 @@ export const RaffleCard = ({
       {raffle.images && raffle.images.length > 0 && (
         <div
           onClick={() => navigate(raffle.pid)}
-          className='flex cursor-pointer items-center justify-center rounded border p-2'
+          className='flex cursor-pointer items-center justify-center rounded-sm border p-2'
         >
           {raffle.images.map((img, i) => (
             <img
@@ -116,7 +116,7 @@ export const RaffleCard = ({
       {moment(raffle.start_date).isAfter(moment()) && (
         <div>
           <p className='font-bold'>Starts:</p>
-          <p className='rounded border border-green-500 px-2 py-1'>
+          <p className='rounded-sm border border-green-500 px-2 py-1'>
             {moment(raffle.start_date).format('LLLL')} EST
           </p>
         </div>
@@ -124,14 +124,14 @@ export const RaffleCard = ({
       <div className='flex gap-4'>
         <div className='flex-1'>
           <p className='font-bold'>Ends:</p>
-          <p className='rounded border border-red-500 px-2 py-1'>
+          <p className='rounded-sm border border-red-500 px-2 py-1'>
             {moment(raffle.end_date).format('LLLL')} EST
           </p>
         </div>
         {raffle.drawing_date && (
           <div className='flex-1'>
             <p className='font-bold'>Drawing:</p>
-            <p className='rounded border border-blue-500 px-2 py-1'>
+            <p className='rounded-sm border border-blue-500 px-2 py-1'>
               {moment(raffle.drawing_date).format('LLLL')} EST
             </p>
           </div>
