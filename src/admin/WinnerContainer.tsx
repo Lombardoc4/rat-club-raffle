@@ -7,9 +7,11 @@ import client from '../graphql/client';
 
 export const WinnerContainer = ({
   entries = [],
+  pid,
   raffleID,
 }: {
   entries?: RaffleEntry[];
+  pid: string
   raffleID: string;
 }) => {
   const [showEmails, setShowEmails] = useState<boolean>(false);
@@ -30,8 +32,9 @@ export const WinnerContainer = ({
 
   const generateWinner = async () => {
     const potentialWinners = entries.filter(
-      (entry) => !winners.find((winner) => winner.id === entry.id),
+      (entry) => !winners.find((winner) => winner.email === entry.email),
     );
+
     const winner =
       potentialWinners[Math.floor(Math.random() * potentialWinners.length)];
 
@@ -40,6 +43,8 @@ export const WinnerContainer = ({
       variables: {
         input: {
           ...winner,
+          raffle_id: pid,
+          raffleID: raffleID
         },
       },
     });
@@ -51,7 +56,6 @@ export const WinnerContainer = ({
     fetchWinners();
   }, []);
 
-  if (winners.length <= 0) return;
 
   return (
     <div>
@@ -75,14 +79,16 @@ export const WinnerContainer = ({
       {entries.length > 0 && (
         <Button title='Generate Winner' onClick={generateWinner} />
       )}
-      <ul className='rounded-sm border p-4'>
-        {winners.map((winner, index) => (
-          <li className='text-xl' key={winner.id + index}>
-            <p>{winner.name}</p>
-            {showEmails && <p className='text-xs'> {winner.email}</p>}
-          </li>
-        ))}
-      </ul>
+      {winners.length > 0 && (
+        <ul className='rounded-sm border p-4 my-4'>
+          {winners.map((winner, index) => (
+            <li className='text-xl' key={winner.id + index}>
+              <p className='capitalize'>{winner.name}</p>
+              {showEmails && <p className='text-xs'> {winner.email}</p>}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

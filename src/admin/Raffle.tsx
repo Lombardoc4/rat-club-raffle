@@ -17,7 +17,6 @@ export const AdminRaffle = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const { pid } = useParams();
 
-  console.log('pid', pid);
 
   useEffect(() => {
     fetchWinners();
@@ -38,7 +37,6 @@ export const AdminRaffle = () => {
           filter: { pid: { eq: pid } },
         },
       });
-      console.log('raffleInfo', data, pid);
 
       const raffleInfo = data.listRaffles.items[0] as RaffleType;
       const raffleEntries = raffleInfo.RaffleEntries?.items as RaffleEntry[];
@@ -73,8 +71,8 @@ export const AdminRaffle = () => {
         {entries.length <= 0 && <p className='text-center'>No Entries</p>}
         {entries.length > 0 && (
           <div className='mx-auto grid max-w-96 gap-6'>
-            <WinnerContainer raffleID={raffle.id} entries={entries} />
-            {entries.length > 0 && <RaffleEntriesContainer entries={entries} />}
+            <WinnerContainer raffleID={raffle.id} pid={pid as string} entries={entries} />
+            <RaffleEntriesContainer entries={entries} />
           </div>
         )}
       </div>

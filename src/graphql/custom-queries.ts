@@ -21,6 +21,7 @@ export const listRafflesDetailed = /* GraphQL */ `
                   RaffleEntries(limit: 1000) {
                       items {
                           name
+                          email
                       }
                   }
                       Winners {
